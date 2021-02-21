@@ -1,9 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 
+
 function App() {
   return (
     <div className="App">
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+        crossorigin="anonymous"
+      />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

@@ -11,3 +11,82 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#roundcorners {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding-top: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 2em;
+  max-height: 100vh;
+}
+
+
+/* Small devices (landscape phones, 544px and up) */
+@media (max-width: 544px) {  
+  #roundcorners {
+    font-size:.8rem;
+    max-width: 400px;
+  }
+}
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (max-width: 768px) {  
+  #roundcorners {
+    font-size:.8rem;
+    max-width: 400px;
+  }
+}
+ 
+/* Large devices (desktops, 992px and up) */
+@media (max-width: 992px) { 
+  #roundcorners {
+    font-size:.8rem;
+    max-width: 400px;
+  }
+}
+ 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {  
+  #roundcorners {
+    font-size:.8rem;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 1200px) {  
+  #roundcorners {
+    font-size:.8rem;
+    max-width: 400px;
+  }
+}
+
+/* li {
+  line-height: 1.5em;
+  margin: .5em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight:100;
+}
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ol {
+  font-family: Combinumerals, Arial, sans-serif;
+  list-style: none;
+  counter-reset: my-awesome-counter;
+  padding-right: 1em;
+}
+
+ol li {
+  counter-increment: my-awesome-counter;
+  margin-right: 0.5rem;
+}
+
+ol li::before {
+  content: counter(my-awesome-counter);
+  font-family: Combinumerals, Arial, sans-serif;
+  margin-right: 0.5rem;
+} */

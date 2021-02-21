@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: 'Combinumerals';
+  src: local('Combinumerals'), url(./fonts/Combinumerals/Combinumerals.ttf) format('truetype');}
