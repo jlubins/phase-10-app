@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { render } from '@testing-library/react';
-import { Container, Row, Col, Badge, ListGroup } from 'react-bootstrap';
+import { Navbar, Container, Row, Col, Badge, Button, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const earlyPhaseList = [
@@ -94,6 +94,25 @@ function getRandom(arr, n) {
     return result;
 }
 
+class NavBar extends React.Component {
+  render() {
+    return (
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home">
+          <img
+            alt=""
+            src="/phase-10-logo.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}
+          Phase 10 Rule Generator
+        </Navbar.Brand>
+      </Navbar>
+    )
+  }
+}
+
 class RuleGenerator extends React.Component {
   constructor(props) {
     super(props);
@@ -119,16 +138,29 @@ class RuleGenerator extends React.Component {
 
   render() {
     const listItems = this.state.earlyPhases.concat(this.state.midPhases).concat(this.state.latePhases).concat(this.state.lastPhase);
-    const listItemsMapped = listItems.map((phase, index) => <ListGroup.Item><Badge pill variant="dark">{index+1}</Badge> {phase}</ListGroup.Item>);
+    const listItemsMapped = listItems.map((phase, index) => 
+    <ListGroup.Item
+    style={{paddingTop: '0.30rem', paddingRight: '0.0rem', paddingBottom: '0.30rem', paddingLeft: '0.0rem'}}>
+      <Row>
+        <Col xs sm md lg="1"><Badge pill variant="dark">{index+1}</Badge> </Col>
+        <Col xs sm md lg="10">{phase}</Col>
+      </Row>
+      
+    </ListGroup.Item>);
 
     return (
       <div>
         <ListGroup variant="flush" id="roundcorners">
-          <h2>Die 10 Phasen</h2>
+          <ListGroup.Item style={{paddingTop: '0.30rem', paddingRight: '0.0rem', paddingBottom: '0.30rem', paddingLeft: '0.0rem'}}>
+            <Row>
+              <Col xs sm md lg="1"> </Col>
+              <Col xs sm md lg="10"><h4 id="rulecard-title">Die 10 Phasen</h4></Col>
+            </Row>
+          </ListGroup.Item>
           {listItemsMapped}
         </ListGroup>
-
-        <button onClick={() => this.regenerate()}> Regenerate </button>
+        <br />
+        <Button variant="dark" onClick={() => this.regenerate()}> Regenerate </Button>
       </div>
     )
   }
@@ -137,14 +169,18 @@ class RuleGenerator extends React.Component {
 // ========================================
 
 ReactDOM.render(
-  <Container>
-    <Row>
-      <Col xs={12} sm={12} md={12} lg={10}>
-        <RuleGenerator />,
-      </Col>
-      <Col md={4} lg={4}>2 of 2</Col>
-    </Row>
-  </Container>,
+  <div>
+    <NavBar />
+    <br />
+    <Container>
+      <Row>
+        <Col xs={12} sm={12} md={12} lg={10}>
+          <RuleGenerator />,
+        </Col>
+        <Col md={4} lg={4}>2 of 2</Col>
+      </Row>
+    </Container>
+  </div>,
   document.getElementById('root')
 );
 

@@ -15,11 +15,25 @@ code {
 #roundcorners {
   border-radius: 25px;
   border: 2px solid #73AD21;
-  padding-top: 2em;
+  padding-top: 1em;
   padding-left: 2em;
   padding-right: 2em;
   padding-bottom: 2em;
   max-height: 100vh;
+}
+
+#rulecard-title {
+  font-family: Helvetica;
+  font: Helvetica;
+  font-weight:900;
+}
+
+#list-group-item {
+  padding: 0.25rem 0.75rem;
+    padding-top: 0.25rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.75rem;
 }
 
 
