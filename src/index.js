@@ -113,6 +113,24 @@ class NavBar extends React.Component {
   }
 }
 
+class ScoreCard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+    players: null,
+    };
+  }
+
+  // render() {
+  //   return(
+  //     <div>
+
+  //     </div>
+  //   )
+  // }
+}
+
 class RuleGenerator extends React.Component {
   constructor(props) {
     super(props);
