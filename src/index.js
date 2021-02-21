@@ -94,7 +94,7 @@ function getRandom(arr, n) {
     return result;
 }
 
-class GetEarlyPhases extends React.Component {
+class RuleGenerator extends React.Component {
   constructor(props) {
     super(props);
 
@@ -118,28 +118,15 @@ class GetEarlyPhases extends React.Component {
   }
 
   render() {
-    // const earlyListItems = this.state.earlyPhases.map((phase) => <li> {phase} </li>)
-    // const midListItems = this.state.midPhases.map((phase) => <li> {phase} </li>)
-    // const lateListItems = this.state.latePhases.map((phase) => <li> {phase} </li>)
-    // const lastListItem = this.state.lastPhase.map((phase) => <li> {phase} </li>)
-
     const listItems = this.state.earlyPhases.concat(this.state.midPhases).concat(this.state.latePhases).concat(this.state.lastPhase);
     const listItemsMapped = listItems.map((phase, index) => <ListGroup.Item><Badge pill variant="dark">{index+1}</Badge> {phase}</ListGroup.Item>);
-    
 
     return (
       <div>
-        <Container>
-          <Row>
-            <Col xs={12} sm={12} md={6} lg={4}>
-              <ListGroup variant="flush" id="roundcorners">
-              <h2>Die 10 Phasen</h2>
-                {listItemsMapped}
-              </ListGroup>
-            </Col>
-            <Col sm={8} md={6} lg={8}>3 of 3</Col>
-          </Row>
-        </Container>
+        <ListGroup variant="flush" id="roundcorners">
+          <h2>Die 10 Phasen</h2>
+          {listItemsMapped}
+        </ListGroup>
 
         <button onClick={() => this.regenerate()}> Regenerate </button>
       </div>
@@ -150,7 +137,14 @@ class GetEarlyPhases extends React.Component {
 // ========================================
 
 ReactDOM.render(
-  <GetEarlyPhases />,
+  <Container>
+    <Row>
+      <Col xs={12} sm={12} md={12} lg={10}>
+        <RuleGenerator />,
+      </Col>
+      <Col md={4} lg={4}>2 of 2</Col>
+    </Row>
+  </Container>,
   document.getElementById('root')
 );
 
