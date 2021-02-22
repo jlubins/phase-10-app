@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { render } from '@testing-library/react';
-import { Navbar, Container, Row, Col, Badge, Button, ListGroup } from 'react-bootstrap';
+import { Navbar, Container, Row, Col, Badge, Button, ListGroup, Form, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useForm } from "react-hook-form";
 
 const earlyPhaseList = [
   "1 Zwilling +  2 Drillinge",
@@ -79,6 +80,19 @@ const lastPhaseList = [
   "1 Vierer- und 1 Fünferfolge, insgesamt max. drei Farben und max. ein Joker",
 ]
 
+const INITIAL_PLAYER_DATA = [
+  {
+    name: 'ExamplePlayer1',
+    unfinished: ['9','10'],
+    finished: ['1','2','3','4','5','6','7','8']
+  },
+  {
+    name: 'ExamplePlayer2',
+    unfinished: ['8', '9', '10'],
+    finished: ['1','2','3','4','5','6','7']
+  }
+]
+
 
 function getRandom(arr, n) {
     var result = new Array(n),
@@ -92,6 +106,40 @@ function getRandom(arr, n) {
         taken[x] = --len in taken ? taken[len] : len;
     }
     return result;
+}
+
+export default function AddPlayerForm() {
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = data => {
+    setPlayerData(playerdata.concat({name: data.name, unfinished: ['1','2','3','4','5','6','7','8', '9', '10'], finished: []}));
+    console.log(playerdata)
+  };
+  console.log(errors);
+
+  const [playerdata, setPlayerData] = React.useState(INITIAL_PLAYER_DATA);
+    return (
+      <div>
+      {playerdata.map(player => (
+        <div>
+          <ListGroup>
+            <ListGroup.Item>{player.name}</ListGroup.Item>
+            <ListGroup.Item>
+              {player.finished.map(phase => (
+              <Badge pill variant="dark">{phase}</Badge>
+              ))}
+              {player.unfinished.map(phase => (
+              <Badge pill variant="light">{phase}</Badge>
+              ))}
+            </ListGroup.Item>
+          </ListGroup>
+        </div>
+      ))}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="text" placeholder="First name" name="name" ref={register({required: true, maxLength: 80})} />
+        <input type="submit" />
+      </form>
+      </div>
+    );
 }
 
 class NavBar extends React.Component {
@@ -113,23 +161,50 @@ class NavBar extends React.Component {
   }
 }
 
-class ScoreCard extends React.Component {
-  constructor(props) {
-    super(props);
+// class ScoreCard extends React.Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = {
-    players: null,
-    };
-  }
+//     this.state = {
+//     players: null,
+//     };
 
-  // render() {
-  //   return(
-  //     <div>
+//     const { register, handleSubmit, errors } = useForm();
+//     const onSubmit = data => { ScoreCard.addPlayer() };
+//     console.log(errors);
+//   }
 
-  //     </div>
-  //   )
-  // }
-}
+//   addPlayer(data) {
+//     this.state.players += data
+//   }
+
+//   render() {
+//     if (this.state.players){
+//       const players = this.state.players.map((player) => 
+//       <ListGroup.Item
+//       style={{paddingTop: '0.30rem', paddingRight: '0.0rem', paddingBottom: '0.30rem', paddingLeft: '0.0rem'}}>
+//         <Row>
+//           <Col xs="1" sm="1" md="1" lg="1"><Badge pill variant="dark">1</Badge> </Col>
+//           <Col xs="10" sm="10" md="10" lg="10">{player}</Col>
+//         </Row>
+        
+//       </ListGroup.Item>);
+//     }
+    
+
+//     return(
+//       <div>
+//         <ListGroup>
+//           {players}
+//         </ListGroup>
+//         <form onSubmit={handleSubmit(onSubmit)}>
+//           <input type="text" placeholder="First name" name="First name" ref={register({required: true, maxLength: 80})} />
+//           <input type="submit" />
+//         </form>
+//       </div>
+//     )
+//   }
+// }
 
 class RuleGenerator extends React.Component {
   constructor(props) {
@@ -160,8 +235,8 @@ class RuleGenerator extends React.Component {
     <ListGroup.Item
     style={{paddingTop: '0.30rem', paddingRight: '0.0rem', paddingBottom: '0.30rem', paddingLeft: '0.0rem'}}>
       <Row>
-        <Col xs sm md lg="1"><Badge pill variant="dark">{index+1}</Badge> </Col>
-        <Col xs sm md lg="10">{phase}</Col>
+        <Col xs="1" sm="1" md="1" lg="1"><Badge pill variant="dark">{index+1}</Badge> </Col>
+        <Col xs="10" sm="10" md="10" lg="10">{phase}</Col>
       </Row>
       
     </ListGroup.Item>);
@@ -171,8 +246,8 @@ class RuleGenerator extends React.Component {
         <ListGroup variant="flush" id="roundcorners">
           <ListGroup.Item style={{paddingTop: '0.30rem', paddingRight: '0.0rem', paddingBottom: '0.30rem', paddingLeft: '0.0rem'}}>
             <Row>
-              <Col xs sm md lg="1"> </Col>
-              <Col xs sm md lg="10"><h4 id="rulecard-title">Die 10 Phasen</h4></Col>
+              <Col xs="1" sm="1" md="1" lg="1"> </Col>
+              <Col xs="10" sm="10" md="10" lg="10"><h4 id="rulecard-title">Die 10 Phasen</h4></Col>
             </Row>
           </ListGroup.Item>
           {listItemsMapped}
@@ -195,7 +270,9 @@ ReactDOM.render(
         <Col xs={12} sm={12} md={12} lg={10}>
           <RuleGenerator />,
         </Col>
-        <Col md={4} lg={4}>2 of 2</Col>
+        <Col md={4} lg={4}>
+          <AddPlayerForm />
+        </Col>
       </Row>
     </Container>
   </div>,
